@@ -1,3 +1,4 @@
+
 def parse_request(request):
     # Extract request method (GET, POST, etc.)
     method = request.method
