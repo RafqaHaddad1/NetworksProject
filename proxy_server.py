@@ -1,6 +1,6 @@
 import socket
 import threading
-
+import cache
 def start_proxy_server(host, port):
     # Create a TCP socket for the proxy server
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -22,6 +22,13 @@ def handle_client(client_socket):
         request = client_socket.recv(1024)
         print(f"Request received from client: {request.decode()}")
        
+
+        cached_response =  cache.get_from_cache(request)
+        if cached_response:
+            print("Serving response from cache.")
+            client_socket.send(cached_response)
+            return
+
         # Forward the request to the actual server
         proxy_server('localhost', 12000, client_socket, request)
     except Exception as e:
@@ -37,13 +44,18 @@ def proxy_server(webserver, port, client_socket, request):
         proxy_socket.connect((webserver, port))
         proxy_socket.send(request)
 
+        full_response = b""
+
         # Receive the response from the server and forward it to the client
         while True:
             response = proxy_socket.recv(4096)
             if len(response) > 0:
+                full_response += response
                 client_socket.send(response)
             else:
                 break
+
+            cache.add_to_cache(request, full_response)
     except Exception as e:
         print(f"Error in proxy server communication: {e}")
     finally:
