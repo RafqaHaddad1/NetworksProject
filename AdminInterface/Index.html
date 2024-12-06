@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proxy Admin Interface</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <h2>Admin Menu</h2>
+            <nav>
+                <ul>
+                    <li><a href="#" data-section="dashboard" class="active">Dashboard</a></li>
+                    <li><a href="#" data-section="logs">Logs</a></li>
+                    <li><a href="#" data-section="cache">Cache Entries</a></li>
+                    <li><a href="#" data-section="config">Configurations</a></li>
+                </ul>
+            </nav>
+        </aside>
+        <main class="content">
+            <section id="dashboard" class="active">
+                <h1>Proxy Admin Dashboard</h1>
+                <div class="stats">
+                    <div class="stat-card">
+                        <h3>Active Connections</h3>
+                        <p id="activeConnections">42</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Cache Hit Rate</h3>
+                        <p id="cacheHitRate">78%</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Total Requests</h3>
+                        <p id="totalRequests">1,234,567</p>
+                    </div>
+                </div>
+            </section>
+            <section id="logs">
+                <h1>Logs</h1>
+                <table id="logsTable">
+                    <thead>
+                        <tr>
+                            <th>Timestamp</th>
+                            <th>Level</th>
+                            <th>Message</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Logs will be inserted here by JavaScript -->
+                    </tbody>
+                </table>
+            </section>
+            <section id="cache">
+                <h1>Cache Entries</h1>
+                <table id="cacheTable">
+                    <thead>
+                        <tr>
+                            <th>URL</th>
+                            <th>Size</th>
+                            <th>Expires</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Cache entries will be inserted here by JavaScript -->
+                    </tbody>
+                </table>
+            </section>
+            <section id="config">
+                <h1>Configurations</h1>
+                <h2>Blacklist / Whitelist</h2>
+                <div class="config-form">
+                    <input type="text" id="domainInput" placeholder="Enter domain">
+                    <button id="addToBlacklist">Add to Blacklist</button>
+                    <button id="addToWhitelist">Add to Whitelist</button>
+                </div>
+                <div class="lists-container">
+                    <div class="list">
+                        <h3>Blacklist</h3>
+                        <ul id="blacklist">
+                            <!-- Blacklist items will be inserted here by JavaScript -->
+                        </ul>
+                    </div>
+                    <div class="list">
+                        <h3>Whitelist</h3>
+                        <ul id="whitelist">
+                            <!-- Whitelist items will be inserted here by JavaScript -->
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

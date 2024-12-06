@@ -1,2 +1,42 @@
 [2024-12-02 13:18:15] This is a test log entry.
 [2024-12-02 13:18:15] Another log entry for the file.
+[2024-12-06 13:53:24] Starting proxy server on 127.0.0.1:8888
+[2024-12-06 13:53:24] Proxy server listening on 127.0.0.1:8888
+[2024-12-06 13:53:33] Accepted connection from ('127.0.0.1', 50686)
+[2024-12-06 13:53:33] Accepted connection from ('127.0.0.1', 50688)
+[2024-12-06 13:53:33] Accepted connection from ('127.0.0.1', 50687)
+[2024-12-06 13:53:35] Received request from client: hello
+[2024-12-06 13:53:35] Checking cache for request: hello
+[2024-12-06 13:53:35] Non-HTTP request received: hello
+[2024-12-06 13:53:35] Forwarding plain text to localhost:12000
+[2024-12-06 13:53:35] Adding response to cache for request: hello
+[2024-12-06 13:53:37] Received request from client: hi
+[2024-12-06 13:53:37] Checking cache for request: hi
+[2024-12-06 13:53:37] Non-HTTP request received: hi
+[2024-12-06 13:53:37] Forwarding plain text to localhost:12000
+[2024-12-06 13:53:37] Adding response to cache for request: hi
+[2024-12-06 13:53:38] Received request from client: helllo
+[2024-12-06 13:53:38] Checking cache for request: helllo
+[2024-12-06 13:53:38] Non-HTTP request received: helllo
+[2024-12-06 13:53:38] Forwarding plain text to localhost:12000
+[2024-12-06 13:53:38] Adding response to cache for request: helllo
+[2024-12-06 13:56:34] Proxy server listening on 127.0.0.1:8888
+[2024-12-06 13:56:40] Connection from ('127.0.0.1', 50726)
+[2024-12-06 13:56:40] Connection from ('127.0.0.1', 50727)
+[2024-12-06 13:56:40] Connection from ('127.0.0.1', 50728)
+[2024-12-06 13:56:42] Request received from client: hello
+[2024-12-06 13:56:42] Non-HTTP request received: hello
+[2024-12-06 13:56:44] Request received from client: hi
+[2024-12-06 13:56:44] Non-HTTP request received: hi
+[2024-12-06 13:56:45] Request received from client: Hello
+[2024-12-06 13:56:45] Non-HTTP request received: Hello
+[2024-12-06 13:57:29] Proxy server listening on 127.0.0.1:8888
+[2024-12-06 13:57:35] Connection from ('127.0.0.1', 50737)
+[2024-12-06 13:57:35] Connection from ('127.0.0.1', 50735)
+[2024-12-06 13:57:35] Connection from ('127.0.0.1', 50736)
+[2024-12-06 13:57:37] Request received from client: hi
+[2024-12-06 13:57:37] Non-HTTP request received: hi
+[2024-12-06 13:57:38] Request received from client: hello
+[2024-12-06 13:57:38] Non-HTTP request received: hello
+[2024-12-06 13:57:39] Request received from client: hi
+[2024-12-06 13:57:39] Serving response from cache.
