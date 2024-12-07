@@ -1,42 +1,242 @@
-[2024-12-02 13:18:15] This is a test log entry.
-[2024-12-02 13:18:15] Another log entry for the file.
-[2024-12-06 13:53:24] Starting proxy server on 127.0.0.1:8888
-[2024-12-06 13:53:24] Proxy server listening on 127.0.0.1:8888
-[2024-12-06 13:53:33] Accepted connection from ('127.0.0.1', 50686)
-[2024-12-06 13:53:33] Accepted connection from ('127.0.0.1', 50688)
-[2024-12-06 13:53:33] Accepted connection from ('127.0.0.1', 50687)
-[2024-12-06 13:53:35] Received request from client: hello
-[2024-12-06 13:53:35] Checking cache for request: hello
-[2024-12-06 13:53:35] Non-HTTP request received: hello
-[2024-12-06 13:53:35] Forwarding plain text to localhost:12000
-[2024-12-06 13:53:35] Adding response to cache for request: hello
-[2024-12-06 13:53:37] Received request from client: hi
-[2024-12-06 13:53:37] Checking cache for request: hi
-[2024-12-06 13:53:37] Non-HTTP request received: hi
-[2024-12-06 13:53:37] Forwarding plain text to localhost:12000
-[2024-12-06 13:53:37] Adding response to cache for request: hi
-[2024-12-06 13:53:38] Received request from client: helllo
-[2024-12-06 13:53:38] Checking cache for request: helllo
-[2024-12-06 13:53:38] Non-HTTP request received: helllo
-[2024-12-06 13:53:38] Forwarding plain text to localhost:12000
-[2024-12-06 13:53:38] Adding response to cache for request: helllo
-[2024-12-06 13:56:34] Proxy server listening on 127.0.0.1:8888
-[2024-12-06 13:56:40] Connection from ('127.0.0.1', 50726)
-[2024-12-06 13:56:40] Connection from ('127.0.0.1', 50727)
-[2024-12-06 13:56:40] Connection from ('127.0.0.1', 50728)
-[2024-12-06 13:56:42] Request received from client: hello
-[2024-12-06 13:56:42] Non-HTTP request received: hello
-[2024-12-06 13:56:44] Request received from client: hi
-[2024-12-06 13:56:44] Non-HTTP request received: hi
-[2024-12-06 13:56:45] Request received from client: Hello
-[2024-12-06 13:56:45] Non-HTTP request received: Hello
-[2024-12-06 13:57:29] Proxy server listening on 127.0.0.1:8888
-[2024-12-06 13:57:35] Connection from ('127.0.0.1', 50737)
-[2024-12-06 13:57:35] Connection from ('127.0.0.1', 50735)
-[2024-12-06 13:57:35] Connection from ('127.0.0.1', 50736)
-[2024-12-06 13:57:37] Request received from client: hi
-[2024-12-06 13:57:37] Non-HTTP request received: hi
-[2024-12-06 13:57:38] Request received from client: hello
-[2024-12-06 13:57:38] Non-HTTP request received: hello
-[2024-12-06 13:57:39] Request received from client: hi
-[2024-12-06 13:57:39] Serving response from cache.
+[2024-12-07 23:54:43] Proxy server listening on 127.0.0.1:8888
+[2024-12-07 23:54:57] Connection from ('127.0.0.1', 52841)
+[2024-12-07 23:54:57] Received request from ('127.0.0.1', 52841):
+GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+[2024-12-07 23:54:57] Parsed Host header: example.com
+[2024-12-07 23:54:57] Forwarding HTTP request to example.com:80
+[2024-12-07 23:54:57] Full HTTP request sent to example.com:
+GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+[2024-12-07 23:56:19] Proxy server listening on 127.0.0.1:8888
+[2024-12-07 23:56:22] Connection from ('127.0.0.1', 52844)
+[2024-12-07 23:56:22] Received request from ('127.0.0.1', 52844):
+GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+[2024-12-07 23:56:22] Parsed Host header: example.com
+[2024-12-07 23:56:22] Forwarding HTTP request to example.com:80
+[2024-12-07 23:56:22] Full HTTP request sent to example.com:
+GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+[2024-12-07 23:58:04] Proxy server listening on 127.0.0.1:8888
+[2024-12-07 23:58:11] Connection from ('127.0.0.1', 52851)
+[2024-12-07 23:58:11] Received request from ('127.0.0.1', 52851):
+GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+[2024-12-07 23:58:11] Parsed Host header: example.com
+[2024-12-07 23:58:11] Forwarding HTTP request to example.com:80
+[2024-12-07 23:58:11] Full HTTP request sent to example.com:
+GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+[2024-12-08 00:01:06] Proxy server listening on 127.0.0.1:8888
+[2024-12-08 00:01:13] Connection from ('127.0.0.1', 52873)
+[2024-12-08 00:01:13] Received request from ('127.0.0.1', 52873):
+GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+[2024-12-08 00:01:13] Parsed Host header: example.com
+[2024-12-08 00:01:13] Forwarding HTTP request to example.com:80
+[2024-12-08 00:01:13] Full HTTP request sent to example.com:
+GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+[2024-12-08 00:02:25] Proxy server listening on 127.0.0.1:8888
+[2024-12-08 00:02:28] Connection from ('127.0.0.1', 52881)
+[2024-12-08 00:02:28] Received request from ('127.0.0.1', 52881):
+GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+[2024-12-08 00:02:28] Parsed Host header: example.com
+[2024-12-08 00:02:28] Forwarding HTTP request to example.com:80
+[2024-12-08 00:02:28] Full HTTP request sent to example.com:
+GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+[2024-12-08 00:03:31] Proxy server listening on 127.0.0.1:8888
+[2024-12-08 00:03:50] Connection from ('127.0.0.1', 52893)
+[2024-12-08 00:03:50] Received request from ('127.0.0.1', 52893):
+GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+[2024-12-08 00:03:50] Parsed Host header: example.com
+[2024-12-08 00:03:50] Forwarding HTTP request to example.com:80
+[2024-12-08 00:03:50] Full HTTP request sent to example.com:
+GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+[2024-12-08 00:06:50] Proxy server listening on 127.0.0.1:8888
+[2024-12-08 00:06:54] Connection from ('127.0.0.1', 52909)
+[2024-12-08 00:06:54] Received request from ('127.0.0.1', 52909):
+GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+[2024-12-08 00:06:54] Parsed Host header: example.com
+[2024-12-08 00:06:54] Forwarding HTTP request to example.com:80
+[2024-12-08 00:06:54] Full HTTP request sent to example.com:
+GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+[2024-12-08 00:08:14] Proxy server listening on 127.0.0.1:8888
+[2024-12-08 00:08:18] Connection from ('127.0.0.1', 52913)
+[2024-12-08 00:08:18] Received request from ('127.0.0.1', 52913):
+GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+[2024-12-08 00:08:18] Parsed Host header: example.com
+[2024-12-08 00:08:18] Forwarding HTTP request to example.com:80
+[2024-12-08 00:08:18] Full HTTP request sent to example.com:
+GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+[2024-12-08 00:09:57] Proxy server listening on 127.0.0.1:8888
+[2024-12-08 00:10:00] Connection from ('127.0.0.1', 52921)
+[2024-12-08 00:10:00] Received request from ('127.0.0.1', 52921):
+GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+[2024-12-08 00:10:00] Parsed Host header: example.com
+[2024-12-08 00:10:00] Forwarding HTTP request to example.com:80
+[2024-12-08 00:10:00] Full HTTP request sent to example.com:
+GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+[2024-12-08 00:11:32] Proxy server listening on 127.0.0.1:8888
+[2024-12-08 00:11:42] Connection from ('127.0.0.1', 52932)
+[2024-12-08 00:11:42] Received request from ('127.0.0.1', 52932):
+GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+[2024-12-08 00:11:42] Parsed Host header: example.com
+[2024-12-08 00:11:42] Forwarding HTTP request to example.com:80
+[2024-12-08 00:11:42] Full HTTP request sent to example.com:
+GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+[2024-12-08 00:12:51] Proxy server listening on 127.0.0.1:8888
+[2024-12-08 00:12:54] Connection from ('127.0.0.1', 52940)
+[2024-12-08 00:12:54] Received request from ('127.0.0.1', 52940):
+GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+[2024-12-08 00:12:54] Parsed Host header: example.com
+[2024-12-08 00:12:55] Forwarding HTTP request to example.com:80
+[2024-12-08 00:12:55] Full HTTP request sent to example.com:
+GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+[2024-12-08 00:12:55] Received response chunk: b'HTTP/1.1 200 OK\r\nAccept-Ranges: bytes\r\nAge: 335813\r\nCache-Control: max-age=604800\r\nContent-Type: tex'...
+[2024-12-08 00:13:22] Proxy server listening on 127.0.0.1:8888
+[2024-12-08 00:13:25] Connection from ('127.0.0.1', 52944)
+[2024-12-08 00:13:25] Received request from ('127.0.0.1', 52944):
+GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+[2024-12-08 00:13:25] Parsed Host header: example.com
+[2024-12-08 00:13:25] Forwarding HTTP request to example.com:80
+[2024-12-08 00:13:25] Full HTTP request sent to example.com:
+GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+[2024-12-08 00:13:25] Received response chunk: b'HTTP/1.1 200 OK\r\nAccept-Ranges: bytes\r\nAge: 185383\r\nCache-Control: max-age=604800\r\nContent-Type: text/html; charset=UTF-8\r\nDate: Sat, 07 Dec 2024 22:13:25 GMT\r\nEtag: "3147526947"\r\nExpires: Sat, 14 Dec 2024 22:13:25 GMT\r\nLast-Modified: Thu, 17 Oct 2019 07:18:26 GMT\r\nServer: ECAcc (dcd/7D06)\r\nVary: Accept-Encoding\r\nX-Cache: HIT\r\nContent-Length: 1256\r\n\r\n<!doctype html>\n<html>\n<head>\n    <title>Example Domain</title>\n\n    <meta charset="utf-8" />\n    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />\n    <meta name="viewport" content="width=device-width, initial-scale=1" />\n    <style type="text/css">\n    body {\n        background-color: #f0f0f2;\n        margin: 0;\n        padding: 0;\n        font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;\n        \n    }\n    div {\n        width: 600px;\n        margin: 5em auto;\n        padding: 2em;\n        background-color: #fdfdff;\n        border-radius'...
