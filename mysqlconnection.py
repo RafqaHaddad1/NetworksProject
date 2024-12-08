@@ -190,5 +190,28 @@ def run_curl():
     else:
         return jsonify({"result": "No URL provided."})
 """""
+
+@app.route('/api/cache', methods=['GET'])
+def get_cache_entries():
+    """Retrieve all cache entries from the database."""
+    try:
+        cursor = mysql.connection.cursor()
+        cursor.execute("SELECT url, size, expires FROM cache")
+        cache_entries = cursor.fetchall()
+        cursor.close()
+
+        # Prepare the cache entries to be returned as JSON
+        result = []
+        for entry in cache_entries:
+            url, size, expires = entry
+            result.append({
+                'url': url,
+                'size': size,
+                'expires': time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(expires))
+            })
+
+        return jsonify(result)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 if __name__ == "__main__":
     app.run(debug=True)

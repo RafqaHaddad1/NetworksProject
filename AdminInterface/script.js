@@ -1,5 +1,27 @@
 
+function loadCacheEntries() {
+    // Make AJAX request to the Flask API
+    fetch('/api/cache')
+        .then(response => response.json())
+        .then(data => {
+            const tableBody = document.querySelector('#cacheTable tbody');
+            tableBody.innerHTML = '';  // Clear existing table rows
 
+            // Loop through the cache entries and create table rows
+            data.forEach(entry => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${entry.url}</td>
+                    <td>${entry.size} bytes</td>
+                    <td>${entry.expires}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching cache entries:', error);
+        });
+}
 function removeItem(listId, item) {
     // Determine the URL for the request based on the listId (whitelist or blacklist)
     let url = '';
@@ -63,6 +85,7 @@ document.addEventListener('DOMContentLoaded', function() {
     loadWhitelist();
     loadblacklist();
     fetchLogs();
+    loadCacheEntries();
     // Navigation
     const navLinks = document.querySelectorAll('.sidebar a');
     const sections = document.querySelectorAll('main section');
@@ -181,53 +204,4 @@ document.addEventListener('DOMContentLoaded', function() {
             alert("Please enter a URL.");
         }
     });
-
-    // Cache Entries
-    const cacheData = [
-        { url: 'https://example.com', size: '10KB', expires: '2023-06-02 10:00:00' },
-        { url: 'https://example.org', size: '5KB', expires: '2023-06-02 11:00:00' },
-        { url: 'https://example.net', size: '15KB', expires: '2023-06-02 12:00:00' },
-    ];
-
-    const cacheTableBody = document.querySelector('#cacheTable tbody');
-    cacheData.forEach(entry => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-            <td>${entry.url}</td>
-            <td>${entry.size}</td>
-            <td>${entry.expires}</td>
-            <td><button onclick="deleteCache('${entry.url}')">Delete</button></td>
-        `;
-        cacheTableBody.appendChild(row);
-    });
-
-
-    
-    // Event listeners for the "Add to Blacklist" and "Add to Whitelist" buttons
-  //  document.getElementById('addToBlacklist').addEventListener('click', function() {
-    //    const domain = document.getElementById('domainInput').value;
-      //  if (domain && !blacklist.includes(domain)) {
-        //    //addToBlacklist(domain);
-          //  document.getElementById('domainInput').value = ''; // Clear input after adding
-       // }
-    //});
-    
-    
-   // document.getElementById('addToWhitelist').addEventListener('click', function() {
-   //     const domain = document.getElementById('domainInput').value;
-    //    if (domain && !whitelist.includes(domain)) {
-    //        addToWhitelist(domain);
-     //       document.getElementById('domainInput').value = '';
-    //    }
-   // });
-
-    window.deleteCache = function(url) {
-        // In a real application, you would send a request to your server to delete the cache entry
-        console.log(`Deleting cache entry for ${url}`);
-        // For this example, we'll just remove it from the table
-        const row = Array.from(cacheTableBody.querySelectorAll('tr')).find(row => row.cells[0].textContent === url);
-        if (row) {
-            row.remove();
-        }
-    };
 });

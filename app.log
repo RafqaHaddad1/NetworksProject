@@ -106447,3 +106447,171 @@ User-Agent: curl/8.9.1
 Accept: */*
 
 
+[2024-12-08 22:54:50] Proxy server listening on 127.0.0.1:8888
+[2024-12-08 22:54:56] Connection from ('127.0.0.1', 54223)
+[2024-12-08 22:54:56] Received request from ('127.0.0.1', 54223):
+GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+[2024-12-08 22:54:56] Cache miss for request: GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Conn
+[2024-12-08 22:54:56] Parsed Host header: example.com
+[2024-12-08 22:54:56] Forwarding HTTP request to example.com:80
+[2024-12-08 22:54:56] Full HTTP request sent to example.com:
+GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+[2024-12-08 22:54:56] Received response chunk: b'HTTP/1.1 200 OK\r\nAge: 436098\r\nCache-Control: max-age=604800\r\nContent-Type: text/html; charset=UTF-8\r\nDate: Sun, 08 Dec 2024 20:54:57 GMT\r\nEtag: "3147526947+ident"\r\nExpires: Sun, 15 Dec 2024 20:54:57 GMT\r\nLast-Modified: Thu, 17 Oct 2019 07:18:26 GMT\r\nServer: ECAcc (dcd/7D0C)\r\nVary: Accept-Encoding\r\nX-Cache: HIT\r\nContent-Length: 1256\r\n\r\n<!doctype html>\n<html>\n<head>\n    <title>Example Domain</title>\n\n    <meta charset="utf-8" />\n    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />\n    <meta name="viewport" content="width=device-width, initial-scale=1" />\n    <style type="text/css">\n    body {\n        background-color: #f0f0f2;\n        margin: 0;\n        padding: 0;\n        font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;\n        \n    }\n    div {\n        width: 600px;\n        margin: 5em auto;\n        padding: 2em;\n        background-color: #fdfdff;\n        border-radius: 0.5em;\n       '...
+[2024-12-08 22:56:16] Connection from ('127.0.0.1', 54276)
+[2024-12-08 22:56:16] Received request from ('127.0.0.1', 54276):
+GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+[2024-12-08 22:56:16] Cache miss for request: GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Conn
+[2024-12-08 22:56:16] Parsed Host header: example.com
+[2024-12-08 22:56:16] Forwarding HTTP request to example.com:80
+[2024-12-08 22:56:16] Full HTTP request sent to example.com:
+GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+[2024-12-08 22:56:16] Received response chunk: b'HTTP/1.1 200 OK\r\nAccept-Ranges: bytes\r\nAge: 267116\r\nCache-Control: max-age=604800\r\nContent-Type: text/html; charset=UTF-8\r\nDate: Sun, 08 Dec 2024 20:56:17 GMT\r\nEtag: "3147526947+gzip"\r\nExpires: Sun, 15 Dec 2024 20:56:17 GMT\r\nLast-Modified: Thu, 17 Oct 2019 07:18:26 GMT\r\nServer: ECAcc (dcd/7D7A)\r\nVary: Accept-Encoding\r\nX-Cache: HIT\r\nContent-Length: 1256\r\n\r\n<!doctype html>\n<html>\n<head>\n    <title>Example Domain</title>\n\n    <meta charset="utf-8" />\n    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />\n    <meta name="viewport" content="width=device-width, initial-scale=1" />\n    <style type="text/css">\n    body {\n        background-color: #f0f0f2;\n        margin: 0;\n        padding: 0;\n        font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;\n        \n    }\n    div {\n        width: 600px;\n        margin: 5em auto;\n        padding: 2em;\n        background-color: #fdfdff;\n        border-r'...
+[2024-12-08 22:57:34] Connection from ('127.0.0.1', 54295)
+[2024-12-08 22:57:34] Received request from ('127.0.0.1', 54295):
+GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+[2024-12-08 22:57:34] Cache miss for request: GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Conn
+[2024-12-08 22:57:34] Parsed Host header: example.com
+[2024-12-08 22:57:34] Forwarding HTTP request to example.com:80
+[2024-12-08 22:57:34] Full HTTP request sent to example.com:
+GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+[2024-12-08 22:57:34] Received response chunk: b'HTTP/1.1 200 OK\r\nAge: 267225\r\nCache-Control: max-age=604800\r\nContent-Type: text/html; charset=UTF-8\r\nDate: Sun, 08 Dec 2024 20:57:35 GMT\r\nEtag: "3147526947+ident"\r\nExpires: Sun, 15 Dec 2024 20:57:35 GMT\r\nLast-Modified: Thu, 17 Oct 2019 07:18:26 GMT\r\nServer: ECAcc (dcd/7D5D)\r\nVary: Accept-Encoding\r\nX-Cache: HIT\r\nContent-Length: 1256\r\n\r\n<!doctype html>\n<html>\n<head>\n    <title>Example Domain</title>\n\n    <meta charset="utf-8" />\n    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />\n    <meta name="viewport" content="width=device-width, initial-scale=1" />\n    <style type="text/css">\n    body {\n        background-color: #f0f0f2;\n        margin: 0;\n        padding: 0;\n        font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;\n        \n    }\n    div {\n        width: 600px;\n        margin: 5em auto;\n        padding: 2em;\n        background-color: #fdfdff;\n        border-radius: 0.5em;\n       '...
+[2024-12-08 22:57:57] Current cache before adding: {}
+[2024-12-08 22:57:57] Caching request: GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Conn with timeout: 30 seconds
+[2024-12-08 22:57:57] Request cached successfully in DB. Response size: 1593 bytes
+[2024-12-08 22:57:57] Current cache after adding: {'GET http://example.com/ HTTP/1.1\r\nHost: example.com\r\nUser-Agent: curl/8.9.1\r\nAccept: */*\r\nProxy-Connection: Keep-Alive\r\n\r\n': {'response': b'HTTP/1.1 200 OK\r\nAge: 436098\r\nCache-Control: max-age=604800\r\nContent-Type: text/html; charset=UTF-8\r\nDate: Sun, 08 Dec 2024 20:54:57 GMT\r\nEtag: "3147526947+ident"\r\nExpires: Sun, 15 Dec 2024 20:54:57 GMT\r\nLast-Modified: Thu, 17 Oct 2019 07:18:26 GMT\r\nServer: ECAcc (dcd/7D0C)\r\nVary: Accept-Encoding\r\nX-Cache: HIT\r\nContent-Length: 1256\r\n\r\n<!doctype html>\n<html>\n<head>\n    <title>Example Domain</title>\n\n    <meta charset="utf-8" />\n    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />\n    <meta name="viewport" content="width=device-width, initial-scale=1" />\n    <style type="text/css">\n    body {\n        background-color: #f0f0f2;\n        margin: 0;\n        padding: 0;\n        font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;\n        \n    }\n    div {\n        width: 600px;\n        margin: 5em auto;\n        padding: 2em;\n        background-color: #fdfdff;\n        border-radius: 0.5em;\n        box-shadow: 2px 3px 7px 2px rgba(0,0,0,0.02);\n    }\n    a:link, a:visited {\n        color: #38488f;\n        text-decoration: none;\n    }\n    @media (max-width: 700px) {\n        div {\n            margin: 0 auto;\n            width: auto;\n        }\n    }\n    </style>    \n</head>\n\n<body>\n<div>\n    <h1>Example Domain</h1>\n    <p>This domain is for use in illustrative examples in documents. You may use this\n    domain in literature without prior coordination or asking for permission.</p>\n    <p><a href="https://www.iana.org/domains/example">More information...</a></p>\n</div>\n</body>\n</html>\n', 'expires_at': 1733691507.5142367}}
+[2024-12-08 22:57:57] Cached response added for request: GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Conn
+[2024-12-08 22:57:57] Status Line: HTTP/1.1 200 OK
+[2024-12-08 22:57:57] Headers:
+HTTP/1.1 200 OK
+Age: 436098
+Cache-Control: max-age=604800
+Content-Type: text/html; charset=UTF-8
+Date: Sun, 08 Dec 2024 20:54:57 GMT
+Etag: "3147526947+ident"
+Expires: Sun, 15 Dec 2024 20:54:57 GMT
+Last-Modified: Thu, 17 Oct 2019 07:18:26 GMT
+Server: ECAcc (dcd/7D0C)
+Vary: Accept-Encoding
+X-Cache: HIT
+Content-Length: 1256
+[2024-12-08 22:57:57] Forwarding HTTP request to example.com:80
+[2024-12-08 22:57:57] Full HTTP request sent to example.com:
+GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+[2024-12-08 22:57:58] Error forwarding HTTP request: [WinError 10053] An established connection was aborted by the software in your host machine
+[2024-12-08 22:57:58] Error: [WinError 10053] An established connection was aborted by the software in your host machine
+[2024-12-08 22:58:04] Connection from ('127.0.0.1', 54320)
+[2024-12-08 22:58:04] Received request from ('127.0.0.1', 54320):
+GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+[2024-12-08 22:58:04] Cache hit for request: GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Conn
+[2024-12-08 22:58:04] Cache hit for request from ('127.0.0.1', 54320)
+[2024-12-08 22:59:17] Current cache before adding: {'GET http://example.com/ HTTP/1.1\r\nHost: example.com\r\nUser-Agent: curl/8.9.1\r\nAccept: */*\r\nProxy-Connection: Keep-Alive\r\n\r\n': {'response': b'HTTP/1.1 200 OK\r\nAge: 436098\r\nCache-Control: max-age=604800\r\nContent-Type: text/html; charset=UTF-8\r\nDate: Sun, 08 Dec 2024 20:54:57 GMT\r\nEtag: "3147526947+ident"\r\nExpires: Sun, 15 Dec 2024 20:54:57 GMT\r\nLast-Modified: Thu, 17 Oct 2019 07:18:26 GMT\r\nServer: ECAcc (dcd/7D0C)\r\nVary: Accept-Encoding\r\nX-Cache: HIT\r\nContent-Length: 1256\r\n\r\n<!doctype html>\n<html>\n<head>\n    <title>Example Domain</title>\n\n    <meta charset="utf-8" />\n    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />\n    <meta name="viewport" content="width=device-width, initial-scale=1" />\n    <style type="text/css">\n    body {\n        background-color: #f0f0f2;\n        margin: 0;\n        padding: 0;\n        font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;\n        \n    }\n    div {\n        width: 600px;\n        margin: 5em auto;\n        padding: 2em;\n        background-color: #fdfdff;\n        border-radius: 0.5em;\n        box-shadow: 2px 3px 7px 2px rgba(0,0,0,0.02);\n    }\n    a:link, a:visited {\n        color: #38488f;\n        text-decoration: none;\n    }\n    @media (max-width: 700px) {\n        div {\n            margin: 0 auto;\n            width: auto;\n        }\n    }\n    </style>    \n</head>\n\n<body>\n<div>\n    <h1>Example Domain</h1>\n    <p>This domain is for use in illustrative examples in documents. You may use this\n    domain in literature without prior coordination or asking for permission.</p>\n    <p><a href="https://www.iana.org/domains/example">More information...</a></p>\n</div>\n</body>\n</html>\n', 'expires_at': 1733691507.5142367}}
+[2024-12-08 22:59:17] Caching request: GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Conn with timeout: 30 seconds
+[2024-12-08 22:59:17] Request cached successfully in DB. Response size: 1614 bytes
+[2024-12-08 22:59:17] Current cache after adding: {'GET http://example.com/ HTTP/1.1\r\nHost: example.com\r\nUser-Agent: curl/8.9.1\r\nAccept: */*\r\nProxy-Connection: Keep-Alive\r\n\r\n': {'response': b'HTTP/1.1 200 OK\r\nAccept-Ranges: bytes\r\nAge: 267116\r\nCache-Control: max-age=604800\r\nContent-Type: text/html; charset=UTF-8\r\nDate: Sun, 08 Dec 2024 20:56:17 GMT\r\nEtag: "3147526947+gzip"\r\nExpires: Sun, 15 Dec 2024 20:56:17 GMT\r\nLast-Modified: Thu, 17 Oct 2019 07:18:26 GMT\r\nServer: ECAcc (dcd/7D7A)\r\nVary: Accept-Encoding\r\nX-Cache: HIT\r\nContent-Length: 1256\r\n\r\n<!doctype html>\n<html>\n<head>\n    <title>Example Domain</title>\n\n    <meta charset="utf-8" />\n    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />\n    <meta name="viewport" content="width=device-width, initial-scale=1" />\n    <style type="text/css">\n    body {\n        background-color: #f0f0f2;\n        margin: 0;\n        padding: 0;\n        font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;\n        \n    }\n    div {\n        width: 600px;\n        margin: 5em auto;\n        padding: 2em;\n        background-color: #fdfdff;\n        border-radius: 0.5em;\n        box-shadow: 2px 3px 7px 2px rgba(0,0,0,0.02);\n    }\n    a:link, a:visited {\n        color: #38488f;\n        text-decoration: none;\n    }\n    @media (max-width: 700px) {\n        div {\n            margin: 0 auto;\n            width: auto;\n        }\n    }\n    </style>    \n</head>\n\n<body>\n<div>\n    <h1>Example Domain</h1>\n    <p>This domain is for use in illustrative examples in documents. You may use this\n    domain in literature without prior coordination or asking for permission.</p>\n    <p><a href="https://www.iana.org/domains/example">More information...</a></p>\n</div>\n</body>\n</html>\n', 'expires_at': 1733691587.378883}}
+[2024-12-08 22:59:17] Cached response added for request: GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Conn
+[2024-12-08 22:59:17] Status Line: HTTP/1.1 200 OK
+[2024-12-08 22:59:17] Headers:
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Age: 267116
+Cache-Control: max-age=604800
+Content-Type: text/html; charset=UTF-8
+Date: Sun, 08 Dec 2024 20:56:17 GMT
+Etag: "3147526947+gzip"
+Expires: Sun, 15 Dec 2024 20:56:17 GMT
+Last-Modified: Thu, 17 Oct 2019 07:18:26 GMT
+Server: ECAcc (dcd/7D7A)
+Vary: Accept-Encoding
+X-Cache: HIT
+Content-Length: 1256
+[2024-12-08 22:59:17] Forwarding HTTP request to example.com:80
+[2024-12-08 22:59:17] Full HTTP request sent to example.com:
+GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+[2024-12-08 22:59:17] Error forwarding HTTP request: [WinError 10053] An established connection was aborted by the software in your host machine
+[2024-12-08 22:59:17] Error: [WinError 10053] An established connection was aborted by the software in your host machine

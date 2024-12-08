@@ -77,18 +77,35 @@ def get_from_cache(request):
         log_message(f"Cache miss for request: {request[:100]}")
     return None
 def add_to_cache(request, response, timeout=CACHE_TIMEOUT):
-    """Cache the response."""
+    """Cache the response in both in-memory and database."""
     log_message(f"Caching request: {request[:100]} with timeout: {timeout} seconds")
 
+    # Calculate response size
+    response_size = len(response)
+
+    # In-memory cache
     with cache_lock:
         response_cache[request] = {
             "response": response,
             "expires_at": time.time() + timeout
         }
 
-    # Log a concise message about the cached response, including its size
-    response_size = len(response)
-    log_message(f"Request cached successfully. Response size: {response_size} bytes")
+    try:
+        with app.app_context():
+            # Serialize the response (e.g., as JSON or compressed string)
+            serialized_response = response  # You can use json.dumps() or other methods for serialization
+            
+            # Save to database cache
+            cursor = mysql.connection.cursor()
+            cursor.execute("""
+                REPLACE INTO cache (url, size, expires)
+                VALUES (%s, %s, %s)
+            """, (request, response_size, time.time() + timeout))
+            mysql.connection.commit()
+            cursor.close()
+            log_message(f"Request cached successfully in DB. Response size: {response_size} bytes")
+    except Exception as e:
+        log_message(f"Error saving to cache DB for {request[:100]}: {e}")
 
 def is_blacklisted(hostname):
     """Check if hostname is blacklisted by querying the database."""
