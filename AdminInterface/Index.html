@@ -4,7 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Proxy Admin Interface</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/AdminInterface/styles.css">
+      <!-- DataTables CSS -->
+      <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+
+      <!-- jQuery Script (required for DataTables) -->
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  
+      <!-- DataTables Script -->
+      <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <!-- Reference to script.js -->
+    <script src="/AdminInterface/script.js"></script>
+
 </head>
 <body>
     <div class="container">
@@ -24,18 +35,17 @@
                 <h1>Proxy Admin Dashboard</h1>
                 <div class="stats">
                     <div class="stat-card">
-                        <h3>Active Connections</h3>
-                        <p id="activeConnections">42</p>
+                        <h3>Enter URL</h3>
+                        <input type="text" id="cmd-input" name="cmd" placeholder="Enter URL">
+                        <button id="run-curl">Run Command</button>
                     </div>
                     <div class="stat-card">
-                        <h3>Cache Hit Rate</h3>
-                        <p id="cacheHitRate">78%</p>
-                    </div>
-                    <div class="stat-card">
-                        <h3>Total Requests</h3>
-                        <p id="totalRequests">1,234,567</p>
+                        <h3>Result</h3>
+                        <pre id="viewpage">The page will be displayed here...</pre>
                     </div>
                 </div>
+                <br/>
+                
             </section>
             <section id="logs">
                 <h1>Logs</h1>
@@ -43,7 +53,7 @@
                     <thead>
                         <tr>
                             <th>Timestamp</th>
-                            <th>Level</th>
+                        
                             <th>Message</th>
                         </tr>
                     </thead>
@@ -72,10 +82,22 @@
                 <h1>Configurations</h1>
                 <h2>Blacklist / Whitelist</h2>
                 <div class="config-form">
-                    <input type="text" id="domainInput" placeholder="Enter domain">
-                    <button id="addToBlacklist">Add to Blacklist</button>
-                    <button id="addToWhitelist">Add to Whitelist</button>
+                    <form id="domainForm" method="post" action="/add-to-blacklist">
+                        <input type="text" id="domainInput" name="url" placeholder="Enter domain">
+                        <button type="submit" id="addToBlacklist">Add to Blacklist</button>
+                    </form>
+                    <form id="domainForm" method="post" action="/add-to-whitelist">
+                        <input type="text" id="domainInput" name="url" placeholder="Enter domain">
+                        <button type="submit" id="addToWhitelist">Add to Whitelist</button>
+                    </form>
+                <!--    <form id="blacklistForm">
+                       
+                    </form>
+                    <form id="whitelistForm">
+                        <button type="submit" id="addToWhitelist">Add to Whitelist</button>
+                    </form>-->
                 </div>
+                
                 <div class="lists-container">
                     <div class="list">
                         <h3>Blacklist</h3>
@@ -93,6 +115,6 @@
             </section>
         </main>
     </div>
-    <script src="script.js"></script>
+ 
 </body>
 </html>

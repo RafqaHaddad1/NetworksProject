@@ -5,6 +5,25 @@ from datetime import datetime
 import os
 import select
 import socket
+from flask import Flask, request, jsonify,render_template, send_from_directory
+from flask_mysqldb import MySQL
+from flask_cors import CORS 
+import subprocess
+from datetime import datetime, timedelta
+import time
+
+app = Flask(__name__,static_folder='AdminInterface')
+
+# Configure MySQL connection
+app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = ''
+app.config['MYSQL_DB'] = 'proxy_server'
+
+mysql = MySQL(app)
+
+
+
 # Cache dictionary to store responses
 response_cache = {}
 cache_lock = threading.Lock()
@@ -25,38 +44,79 @@ if not os.path.exists(LOG_FILE):
         log_file.write('')
 
 def log_message(message):
-    """Log messages with a timestamp."""
+    """Log messages with a timestamp and save to MySQL database."""
     timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     log_entry = f'[{timestamp}] {message}'
+
+    # Log to file
     with open(LOG_FILE, 'a') as log_file:
         log_file.write(log_entry + '\n')
 
+    # Insert log entry into the database
+    try:
+        with app.app_context():  # Ensure database interaction happens within app context
+            cursor = mysql.connection.cursor()
+            cursor.execute("INSERT INTO logs (timestamp, message) VALUES (%s, %s)", (timestamp, message))
+            mysql.connection.commit()  # Commit the transaction
+            cursor.close()  # Close the cursor
+    except Exception as e:
+        print(f"Error saving log to the database: {e}")
+
 def get_from_cache(request):
     """Retrieve the cached response if valid."""
+    
     with cache_lock:
         if request in response_cache:
             entry = response_cache[request]
             if entry["expires_at"] > time.time():  # Cache is valid
+                log_message(f"Cache hit for request: {request[:100]}")
                 return entry["response"]
             else:
+                log_message(f"Cache expired for request: {request[:100]}")
                 del response_cache[request]  # Remove expired entry
+        log_message(f"Cache miss for request: {request[:100]}")
     return None
-
 def add_to_cache(request, response, timeout=CACHE_TIMEOUT):
     """Cache the response."""
+    log_message(f"Caching request: {request[:100]} with timeout: {timeout} seconds")
+
     with cache_lock:
         response_cache[request] = {
             "response": response,
             "expires_at": time.time() + timeout
         }
 
+    # Log a concise message about the cached response, including its size
+    response_size = len(response)
+    log_message(f"Request cached successfully. Response size: {response_size} bytes")
+
 def is_blacklisted(hostname):
-    """Check if hostname is blacklisted."""
-    return hostname in BLACKLIST
+    """Check if hostname is blacklisted by querying the database."""
+    try:
+        with app.app_context():
+            cursor = mysql.connection.cursor()
+            cursor.execute("SELECT url FROM blacklist WHERE url = %s", (hostname,))
+            result = cursor.fetchone()
+            cursor.close()
+            return result is not None  # Return True if URL is found in the blacklist
+    except Exception as e:
+        log_message(f"Error checking blacklist for {hostname}: {e}")
+        return False
+
 
 def is_whitelisted(hostname):
-    """Check if hostname is whitelisted."""
-    return not WHITELIST or hostname in WHITELIST
+    """Check if hostname is whitelisted by querying the database."""
+    try:
+        with app.app_context():
+            cursor = mysql.connection.cursor()
+            cursor.execute("SELECT url FROM whitelist WHERE url = %s", (hostname,))
+            result = cursor.fetchone()
+            cursor.close()
+            return result is not None  # Return True if URL is found in the whitelist
+    except Exception as e:
+        log_message(f"Error checking whitelist for {hostname}: {e}")
+        return False
+
 
 def start_proxy_server():
     """Start the proxy server."""
@@ -69,7 +129,7 @@ def start_proxy_server():
     while True:
         client_socket, _ = server_socket.accept()
         log_message(f"Connection from {client_socket.getpeername()}")
-        handle_client(client_socket)
+        threading.Thread(target=handle_client, args=(client_socket,)).start()
 
 def handle_client(client_socket):
     """Handle the client request, forward it, and send back the response."""
@@ -78,30 +138,39 @@ def handle_client(client_socket):
         request = client_socket.recv(4096).decode('utf-8')
         if not request:
             return
-        
+
         log_message(f"Received request from {client_socket.getpeername()}:\n{request}")
-        
-        # Check for cached response
+
+        # Check if the request is a CONNECT method for HTTPS
+        if request.startswith("CONNECT"):
+            target_host, target_port = parse_connect_request(request)
+            handle_https_tunnel(client_socket, target_host, target_port)
+            return
+
+        # Check for cached response for HTTP requests
         cached_response = get_from_cache(request)
         if cached_response:
             log_message(f"Cache hit for request from {client_socket.getpeername()}")
             client_socket.send(cached_response)
             return
-        
-        # Parse the request to get the target host and port
+
+        # Parse the request to get the target host and port for HTTP
         target_host, target_port = parse_target_host(request)
         log_message(f"Parsed Host header: {target_host}")
-        
-        # Forward the request to the target server
+        if is_blacklisted(target_host):
+            log_message(f"Blocked blacklisted request to {target_host}")
+            client_socket.send(b"HTTP/1.1 403 Forbidden\r\n\r\n")
+            client_socket.close()
+            return
+
+
         proxy_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         proxy_socket.connect((target_host, target_port))
-        
-        # Log and forward the full request
+
         log_message(f"Forwarding HTTP request to {target_host}:{target_port}")
         log_message(f"Full HTTP request sent to {target_host}:\n{request}")
         proxy_socket.sendall(request.encode())
 
-        # Receive and log the response from the target server
         full_response = b""
         while True:
             response = proxy_socket.recv(4096)
@@ -109,33 +178,34 @@ def handle_client(client_socket):
                 break
             full_response += response
             client_socket.send(response)  # Send the response back to the client
-            log_message(f"Received response chunk: {response[:1000]}...")  # Log the response chunk
-
-        # Cache the response for future requests
+            log_message(f"Received response chunk: {response[:1000]}...")
+        log_message(f"Current cache before adding: {response_cache}")
         add_to_cache(request, full_response)
-
+        log_message(f"Current cache after adding: {response_cache}")
+        log_message(f"Cached response added for request: {request[:100]}")
         # Split headers and body for logging
         response_parts = full_response.split(b'\r\n\r\n', 1)
         headers = response_parts[0]
         body = response_parts[1] if len(response_parts) > 1 else b""
-        
+
         headers_decoded = headers.decode(errors='ignore')
         status_line = headers_decoded.splitlines()[0]
         log_message(f"Status Line: {status_line}")
         log_message(f"Headers:\n{headers_decoded}")
-        
+
         try:
             body_decoded = body.decode(errors='ignore')
         except UnicodeDecodeError:
             body_decoded = "[Binary data that couldn't be decoded]"
-        
-        # Log response body, truncating if necessary
+        # Forward the request to the target server for HTTP
+        proxy_http(target_host, target_port, client_socket, request)
         log_message(f"Response Body:\n{body_decoded[:500]}... (truncated)")
 
     except Exception as e:
         log_message(f"Error: {e}")
     finally:
         client_socket.close()
+
 
 def parse_target_host(request):
     """Parse the host from the request headers."""
@@ -152,33 +222,43 @@ def parse_target_host(request):
 def parse_connect_request(request):
     """Parse CONNECT request for HTTPS."""
     target = request.split(' ')[1]
-    target_server, target_port = target.split(':')
-    return target_server, int(target_port)
+    target_host, target_port = target.split(':')
+    return target_host, int(target_port)
 
-def handle_https_tunnel(client_socket, target_server, target_port):
+
+def handle_https_tunnel(client_socket, target_host, target_port):
     """Handle HTTPS tunneling (CONNECT method)."""
-    log_message(f"Establishing HTTPS tunnel to {target_server}:{target_port}")
-    client_socket.send(b"HTTP/1.1 200 Connection Established\r\n\r\n")
-    
-    # Set up SSL socket connection to target server
-    proxy_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    proxy_socket.connect((target_server, target_port))
-    
-    sockets = [client_socket, proxy_socket]
-    while True:
-        ready_sockets, _, _ = select.select(sockets, [], [])
-        for sock in ready_sockets:
-            data = sock.recv(4096)
-            if not data:
-                return
-            # Forward the data
-            if sock is client_socket:
-                proxy_socket.send(data)
-            else:
-                client_socket.send(data)
+    try:
+        log_message(f"Establishing HTTPS tunnel to {target_host}:{target_port}")
+        log_message(f"HTTP/1.1 200 Connection Established\r\n\r\n")
+        client_socket.send(b"HTTP/1.1 200 Connection Established\r\n\r\n")
+        
+        # Establish connection to the target server
+        proxy_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        proxy_socket.connect((target_host, target_port))
 
-    proxy_socket.close()
-    client_socket.close()
+        # Forward data between the client and target server
+        sockets = [client_socket, proxy_socket]
+        while True:
+            ready_sockets, _, _ = select.select(sockets, [], [])
+            for sock in ready_sockets:
+                data = sock.recv(4096)
+                if not data:
+                    return
+
+                # Log the data being forwarded (size only)
+                if sock is client_socket:
+                    log_message(f"Forwarding {len(data)} bytes from client to {target_host}:{target_port}")
+                    proxy_socket.sendall(data)
+                else:
+                    log_message(f"Forwarding {len(data)} bytes from {target_host}:{target_port} to client")
+                    client_socket.sendall(data)
+    except Exception as e:
+        log_message(f"Error in HTTPS tunnel: {e}")
+    finally:
+        client_socket.close()
+        proxy_socket.close()
+
 
 def proxy_http(target_server, target_port, client_socket, request):
     """Handle forwarding HTTP requests and responses."""
@@ -235,6 +315,8 @@ def proxy_http(target_server, target_port, client_socket, request):
     finally:
         proxy_socket.close()
 
+
+
 def parse_request(request):
     """Parse HTTP request details."""
     lines = request.split('\r\n')
@@ -263,3 +345,4 @@ def parse_host_header(headers):
 
 if __name__ == "__main__":
     start_proxy_server()
+
