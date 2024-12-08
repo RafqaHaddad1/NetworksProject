@@ -17,6 +17,7 @@ function loadCacheEntries() {
                 `;
                 tableBody.appendChild(row);
             });
+            $("#cacheTable").DataTable();
         })
         .catch(error => {
             console.error('Error fetching cache entries:', error);

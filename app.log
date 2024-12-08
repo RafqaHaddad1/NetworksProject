@@ -106615,3 +106615,68 @@ Proxy-Connection: Keep-Alive
 
 [2024-12-08 22:59:17] Error forwarding HTTP request: [WinError 10053] An established connection was aborted by the software in your host machine
 [2024-12-08 22:59:17] Error: [WinError 10053] An established connection was aborted by the software in your host machine
+[2024-12-08 23:02:16] Proxy server listening on 127.0.0.1:8888
+[2024-12-08 23:02:30] Connection from ('127.0.0.1', 54494)
+[2024-12-08 23:02:30] Received request from ('127.0.0.1', 54494):
+GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+[2024-12-08 23:02:30] Cache miss for request: GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Conn
+[2024-12-08 23:02:30] Parsed Host header: example.com
+[2024-12-08 23:02:30] Forwarding HTTP request to example.com:80
+[2024-12-08 23:02:30] Full HTTP request sent to example.com:
+GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+[2024-12-08 23:02:30] Received response chunk: b'HTTP/1.1 200 OK\r\nAccept-Ranges: bytes\r\nAge: 314522\r\nCache-Control: max-age=604800\r\nContent-Type: text/html; charset=UTF-8\r\nDate: Sun, 08 Dec 2024 21:02:31 GMT\r\nEtag: "3147526947"\r\nExpires: Sun, 15 Dec 2024 21:02:31 GMT\r\nLast-Modified: Thu, 17 Oct 2019 07:18:26 GMT\r\nServer: ECAcc (dcd/7D23)\r\nVary: Accept-Encoding\r\nX-Cache: HIT\r\nContent-Length: 1256\r\n\r\n<!doctype html>\n<html>\n<head>\n    <title>Example Domain</title>\n\n    <meta charset="utf-8" />\n    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />\n    <meta name="viewport" content="width=device-width, initial-scale=1" />\n    <style type="text/css">\n    body {\n        background-color: #f0f0f2;\n        margin: 0;\n        padding: 0;\n        font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;\n        \n    }\n    div {\n        width: 600px;\n        margin: 5em auto;\n        padding: 2em;\n        background-color: #fdfdff;\n        border-radius'...
+[2024-12-08 23:05:31] Current cache before adding: {}
+[2024-12-08 23:05:31] Caching request: GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Conn with timeout: 30 seconds
+[2024-12-08 23:05:31] Request cached successfully in DB. Response size: 1609 bytes
+[2024-12-08 23:05:31] Current cache after adding: {'GET http://example.com/ HTTP/1.1\r\nHost: example.com\r\nUser-Agent: curl/8.9.1\r\nAccept: */*\r\nProxy-Connection: Keep-Alive\r\n\r\n': {'response': b'HTTP/1.1 200 OK\r\nAccept-Ranges: bytes\r\nAge: 314522\r\nCache-Control: max-age=604800\r\nContent-Type: text/html; charset=UTF-8\r\nDate: Sun, 08 Dec 2024 21:02:31 GMT\r\nEtag: "3147526947"\r\nExpires: Sun, 15 Dec 2024 21:02:31 GMT\r\nLast-Modified: Thu, 17 Oct 2019 07:18:26 GMT\r\nServer: ECAcc (dcd/7D23)\r\nVary: Accept-Encoding\r\nX-Cache: HIT\r\nContent-Length: 1256\r\n\r\n<!doctype html>\n<html>\n<head>\n    <title>Example Domain</title>\n\n    <meta charset="utf-8" />\n    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />\n    <meta name="viewport" content="width=device-width, initial-scale=1" />\n    <style type="text/css">\n    body {\n        background-color: #f0f0f2;\n        margin: 0;\n        padding: 0;\n        font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;\n        \n    }\n    div {\n        width: 600px;\n        margin: 5em auto;\n        padding: 2em;\n        background-color: #fdfdff;\n        border-radius: 0.5em;\n        box-shadow: 2px 3px 7px 2px rgba(0,0,0,0.02);\n    }\n    a:link, a:visited {\n        color: #38488f;\n        text-decoration: none;\n    }\n    @media (max-width: 700px) {\n        div {\n            margin: 0 auto;\n            width: auto;\n        }\n    }\n    </style>    \n</head>\n\n<body>\n<div>\n    <h1>Example Domain</h1>\n    <p>This domain is for use in illustrative examples in documents. You may use this\n    domain in literature without prior coordination or asking for permission.</p>\n    <p><a href="https://www.iana.org/domains/example">More information...</a></p>\n</div>\n</body>\n</html>\n', 'expires_at': 1733691961.1840284}}
+[2024-12-08 23:05:31] Cached response added for request: GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Conn
+[2024-12-08 23:05:31] Status Line: HTTP/1.1 200 OK
+[2024-12-08 23:05:31] Headers:
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Age: 314522
+Cache-Control: max-age=604800
+Content-Type: text/html; charset=UTF-8
+Date: Sun, 08 Dec 2024 21:02:31 GMT
+Etag: "3147526947"
+Expires: Sun, 15 Dec 2024 21:02:31 GMT
+Last-Modified: Thu, 17 Oct 2019 07:18:26 GMT
+Server: ECAcc (dcd/7D23)
+Vary: Accept-Encoding
+X-Cache: HIT
+Content-Length: 1256
+[2024-12-08 23:05:31] Forwarding HTTP request to example.com:80
+[2024-12-08 23:05:31] Full HTTP request sent to example.com:
+GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+[2024-12-08 23:05:31] Error forwarding HTTP request: [WinError 10053] An established connection was aborted by the software in your host machine
+[2024-12-08 23:05:31] Error: [WinError 10053] An established connection was aborted by the software in your host machine
