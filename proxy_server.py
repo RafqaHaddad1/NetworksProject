@@ -161,7 +161,7 @@ def handle_client(client_socket):
         # Check if the request is a CONNECT method for HTTPS
         if request.startswith("CONNECT"):
             target_host, target_port = parse_connect_request(request)
-            handle_https_tunnel(client_socket, target_host, target_port)
+            handle_https_tunnel(client_socket, target_host, target_port,request )
             return
 
         # Check for cached response for HTTP requests
@@ -195,12 +195,11 @@ def handle_client(client_socket):
                 break
             full_response += response
             client_socket.send(response)  # Send the response back to the client
+            log_message(f"before proxy http")
+            proxy_http(target_host, target_port, client_socket, request)
+           
             log_message(f"Received response chunk: {response[:1000]}...")
-        log_message(f"Current cache before adding: {response_cache}")
-        add_to_cache(request, full_response)
-        log_message(f"Current cache after adding: {response_cache}")
-        log_message(f"Cached response added for request: {request[:100]}")
-        # Split headers and body for logging
+        
         response_parts = full_response.split(b'\r\n\r\n', 1)
         headers = response_parts[0]
         body = response_parts[1] if len(response_parts) > 1 else b""
@@ -215,7 +214,8 @@ def handle_client(client_socket):
         except UnicodeDecodeError:
             body_decoded = "[Binary data that couldn't be decoded]"
         # Forward the request to the target server for HTTP
-        proxy_http(target_host, target_port, client_socket, request)
+        log_message(f"before proxy http")
+        
         log_message(f"Response Body:\n{body_decoded[:500]}... (truncated)")
 
     except Exception as e:
@@ -223,11 +223,11 @@ def handle_client(client_socket):
     finally:
         client_socket.close()
 
-
 def parse_target_host(request):
     """Parse the host from the request headers."""
     lines = request.splitlines()
     for line in lines:
+        
         if line.startswith("Host:"):
             host = line.split(" ")[1].strip()
             if ':' in host:
@@ -278,7 +278,7 @@ def handle_https_tunnel(client_socket, target_host, target_port):
 
 
 def proxy_http(target_server, target_port, client_socket, request):
-    """Handle forwarding HTTP requests and responses."""
+    """Handle forwarding HTTP requests and responses while caching progressively."""
     try:
         log_message(f"Forwarding HTTP request to {target_server}:{target_port}")
         
@@ -290,18 +290,28 @@ def proxy_http(target_server, target_port, client_socket, request):
         proxy_socket.connect((target_server, target_port))
         proxy_socket.send(request.encode())
 
-        # Initialize variable to store the full response
+        # Initialize variable to store the full response for eventual caching/logging
         full_response = b""
 
         # Receive data from the target server
         while True:
-            response = proxy_socket.recv(4096)
-            if not response:
+            response_chunk = proxy_socket.recv(4096)
+            if not response_chunk:
                 break
-            full_response += response
-            client_socket.send(response)  # Send the response back to the client
 
-        # Split response into header and body
+            # Send the chunk to the client
+            client_socket.send(response_chunk)
+
+            # Append the chunk to the cumulative full response
+            full_response += response_chunk
+
+            # Cache the chunk progressively
+            add_to_cache(request, full_response, CACHE_TIMEOUT)
+
+            # Log each chunk's size and progress
+            log_message(f"Forwarded and cached chunk of size {len(response_chunk)} bytes")
+
+        # Split response into headers and body for logging purposes
         response_parts = full_response.split(b'\r\n\r\n', 1)
         headers = response_parts[0]
         body = response_parts[1] if len(response_parts) > 1 else b""
@@ -323,15 +333,11 @@ def proxy_http(target_server, target_port, client_socket, request):
         # Log the response body (truncated for large responses)
         log_message(f"Response Body:\n{body_decoded[:500]}... (truncated)")
 
-        # Cache the response for future requests
-        add_to_cache(request, full_response)
-
     except Exception as e:
         log_message(f"Error forwarding HTTP request: {e}")
         client_socket.send(b"HTTP/1.1 502 Bad Gateway\r\n\r\n")
     finally:
         proxy_socket.close()
-
 
 
 def parse_request(request):
