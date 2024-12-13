@@ -62,20 +62,6 @@ def log_message(message):
     except Exception as e:
         print(f"Error saving log to the database: {e}")
 
-def get_from_cache(request):
-    """Retrieve the cached response if valid."""
-    
-    with cache_lock:
-        if request in response_cache:
-            entry = response_cache[request]
-            if entry["expires_at"] > time.time():  # Cache is valid
-                log_message(f"Cache hit for request: {request[:100]}")
-                return entry["response"]
-            else:
-                log_message(f"Cache expired for request: {request[:100]}")
-                del response_cache[request]  # Remove expired entry
-        log_message(f"Cache miss for request: {request[:100]}")
-    return None
 def add_to_cache(request, response, timeout=CACHE_TIMEOUT):
     """Cache the response in both in-memory and database."""
     log_message(f"Caching request: {request[:100]} with timeout: {timeout} seconds")
@@ -120,7 +106,6 @@ def is_blacklisted(hostname):
         log_message(f"Error checking blacklist for {hostname}: {e}")
         return False
 
-
 def is_whitelisted(hostname):
     """Check if hostname is whitelisted by querying the database."""
     try:
@@ -133,7 +118,6 @@ def is_whitelisted(hostname):
     except Exception as e:
         log_message(f"Error checking whitelist for {hostname}: {e}")
         return False
-
 
 def start_proxy_server():
     """Start the proxy server."""
@@ -174,13 +158,14 @@ def handle_client(client_socket):
         # Parse the request to get the target host and port for HTTP
         target_host, target_port = parse_target_host(request)
         log_message(f"Parsed Host header: {target_host}")
+        #blacklist check 
         if is_blacklisted(target_host):
             log_message(f"Blocked blacklisted request to {target_host}")
             client_socket.send(b"HTTP/1.1 403 Forbidden\r\n\r\n")
             client_socket.close()
             return
 
-
+        #Forward the request 
         proxy_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         proxy_socket.connect((target_host, target_port))
 
@@ -188,12 +173,15 @@ def handle_client(client_socket):
         log_message(f"Full HTTP request sent to {target_host}:\n{request}")
         proxy_socket.sendall(request.encode())
 
+        #receive and send response
         full_response = b""
         while True:
+            # recieve chunks of 4096 bytes
             response = proxy_socket.recv(4096)
             if not response:
                 break
             full_response += response
+            # Forward response
             client_socket.send(response)  # Send the response back to the client
             log_message(f"before proxy http")
             proxy_http(target_host, target_port, client_socket, request)
@@ -222,26 +210,6 @@ def handle_client(client_socket):
         log_message(f"Error: {e}")
     finally:
         client_socket.close()
-
-def parse_target_host(request):
-    """Parse the host from the request headers."""
-    lines = request.splitlines()
-    for line in lines:
-        
-        if line.startswith("Host:"):
-            host = line.split(" ")[1].strip()
-            if ':' in host:
-                return host.split(":")[0], int(host.split(":")[1])
-            else:
-                return host, 80  # Default to port 80 for HTTP
-    return None, None
-
-def parse_connect_request(request):
-    """Parse CONNECT request for HTTPS."""
-    target = request.split(' ')[1]
-    target_host, target_port = target.split(':')
-    return target_host, int(target_port)
-
 
 def handle_https_tunnel(client_socket, target_host, target_port):
     """Handle HTTPS tunneling (CONNECT method)."""
@@ -275,7 +243,6 @@ def handle_https_tunnel(client_socket, target_host, target_port):
     finally:
         client_socket.close()
         proxy_socket.close()
-
 
 def proxy_http(target_server, target_port, client_socket, request):
     """Handle forwarding HTTP requests and responses while caching progressively."""
@@ -339,6 +306,26 @@ def proxy_http(target_server, target_port, client_socket, request):
     finally:
         proxy_socket.close()
 
+
+
+def parse_target_host(request):
+    """Parse the host from the request headers."""
+    lines = request.splitlines()
+    for line in lines:
+        
+        if line.startswith("Host:"):
+            host = line.split(" ")[1].strip()
+            if ':' in host:
+                return host.split(":")[0], int(host.split(":")[1])
+            else:
+                return host, 80  # Default to port 80 for HTTP
+    return None, None
+
+def parse_connect_request(request):
+    """Parse CONNECT request for HTTPS."""
+    target = request.split(' ')[1]
+    target_host, target_port = target.split(':')
+    return target_host, int(target_port)
 
 def parse_request(request):
     """Parse HTTP request details."""
