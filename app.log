@@ -1,0 +1,150 @@
+[2024-12-13 10:08:38] Proxy server listening on 127.0.0.1:8888
+[2024-12-13 10:09:21] Connection from ('127.0.0.1', 53814)
+[2024-12-13 10:09:21] Received request from ('127.0.0.1', 53814):
+GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+[2024-12-13 10:09:21] Error: name 'get_from_cache' is not defined
+[2024-12-13 10:10:33] Connection from ('127.0.0.1', 53874)
+[2024-12-13 10:10:33] Received request from ('127.0.0.1', 53874):
+GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+[2024-12-13 10:10:33] Error: name 'get_from_cache' is not defined
+[2024-12-13 10:10:38] Connection from ('127.0.0.1', 53893)
+[2024-12-13 10:10:38] Received request from ('127.0.0.1', 53893):
+GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+[2024-12-13 10:10:38] Error: name 'get_from_cache' is not defined
+[2024-12-13 10:10:53] Proxy server listening on 127.0.0.1:8888
+[2024-12-13 10:11:05] Connection from ('127.0.0.1', 53911)
+[2024-12-13 10:11:05] Received request from ('127.0.0.1', 53911):
+GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+[2024-12-13 10:11:05] Cache miss for request: GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Conn
+[2024-12-13 10:11:05] Parsed Host header: example.com
+[2024-12-13 10:11:06] Forwarding HTTP request to example.com:80
+[2024-12-13 10:11:06] Full HTTP request sent to example.com:
+GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+[2024-12-13 10:11:06] before proxy http
+[2024-12-13 10:11:06] Forwarding HTTP request to example.com:80
+[2024-12-13 10:11:06] Full HTTP request sent to example.com:
+GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+[2024-12-13 10:11:06] Caching request: GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Conn with timeout: 30 seconds
+[2024-12-13 10:11:06] Request cached successfully in DB. Response size: 1633 bytes
+[2024-12-13 10:11:06] Forwarded and cached chunk of size 1633 bytes
+[2024-12-13 10:11:18] Connection from ('127.0.0.1', 53941)
+[2024-12-13 10:11:18] Received request from ('127.0.0.1', 53941):
+GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+[2024-12-13 10:11:18] Cache hit for request: GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Conn
+[2024-12-13 10:11:18] Cache hit for request from ('127.0.0.1', 53941)
+[2024-12-13 10:11:57] Connection from ('127.0.0.1', 53965)
+[2024-12-13 10:11:57] Received request from ('127.0.0.1', 53965):
+GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+[2024-12-13 10:11:57] Cache expired for request: GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Conn
+[2024-12-13 10:11:57] Cache miss for request: GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Conn
+[2024-12-13 10:11:57] Parsed Host header: example.com
+[2024-12-13 10:11:57] Blocked blacklisted request to example.com
+[2024-12-13 10:12:15] Connection from ('127.0.0.1', 53992)
+[2024-12-13 10:12:15] Received request from ('127.0.0.1', 53992):
+GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+[2024-12-13 10:12:15] Cache miss for request: GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Conn
+[2024-12-13 10:12:15] Parsed Host header: example.com
+[2024-12-13 10:12:15] Forwarding HTTP request to example.com:80
+[2024-12-13 10:12:15] Full HTTP request sent to example.com:
+GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+[2024-12-13 10:12:16] before proxy http
+[2024-12-13 10:12:16] Forwarding HTTP request to example.com:80
+[2024-12-13 10:12:16] Full HTTP request sent to example.com:
+GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Connection: Keep-Alive
+
+
+[2024-12-13 10:12:16] Caching request: GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: curl/8.9.1
+Accept: */*
+Proxy-Conn with timeout: 30 seconds
+[2024-12-13 10:12:16] Request cached successfully in DB. Response size: 1616 bytes
+[2024-12-13 10:12:16] Forwarded and cached chunk of size 1616 bytes

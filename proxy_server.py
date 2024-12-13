@@ -62,6 +62,21 @@ def log_message(message):
     except Exception as e:
         print(f"Error saving log to the database: {e}")
 
+def get_from_cache(request):
+    """Retrieve the cached response if valid."""
+    
+    with cache_lock:
+        if request in response_cache:
+            entry = response_cache[request]
+            if entry["expires_at"] > time.time():  # Cache is valid
+                log_message(f"Cache hit for request: {request[:100]}")
+                return entry["response"]
+            else:
+                log_message(f"Cache expired for request: {request[:100]}")
+                del response_cache[request]  # Remove expired entry
+        log_message(f"Cache miss for request: {request[:100]}")
+    return None
+
 def add_to_cache(request, response, timeout=CACHE_TIMEOUT):
     """Cache the response in both in-memory and database."""
     log_message(f"Caching request: {request[:100]} with timeout: {timeout} seconds")
@@ -305,8 +320,6 @@ def proxy_http(target_server, target_port, client_socket, request):
         client_socket.send(b"HTTP/1.1 502 Bad Gateway\r\n\r\n")
     finally:
         proxy_socket.close()
-
-
 
 def parse_target_host(request):
     """Parse the host from the request headers."""
