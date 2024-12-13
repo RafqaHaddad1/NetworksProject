@@ -1,6 +1,6 @@
-[2024-12-13 10:08:38] Proxy server listening on 127.0.0.1:8888
-[2024-12-13 10:09:21] Connection from ('127.0.0.1', 53814)
-[2024-12-13 10:09:21] Received request from ('127.0.0.1', 53814):
+[2024-12-13 17:59:33] Proxy server listening on 127.0.0.1:8888
+[2024-12-13 17:59:54] Connection from ('127.0.0.1', 55650)
+[2024-12-13 17:59:54] Received request from ('127.0.0.1', 55650):
 GET http://example.com/ HTTP/1.1
 Host: example.com
 User-Agent: curl/8.9.1
@@ -8,45 +8,14 @@ Accept: */*
 Proxy-Connection: Keep-Alive
 
 
-[2024-12-13 10:09:21] Error: name 'get_from_cache' is not defined
-[2024-12-13 10:10:33] Connection from ('127.0.0.1', 53874)
-[2024-12-13 10:10:33] Received request from ('127.0.0.1', 53874):
-GET http://example.com/ HTTP/1.1
-Host: example.com
-User-Agent: curl/8.9.1
-Accept: */*
-Proxy-Connection: Keep-Alive
-
-
-[2024-12-13 10:10:33] Error: name 'get_from_cache' is not defined
-[2024-12-13 10:10:38] Connection from ('127.0.0.1', 53893)
-[2024-12-13 10:10:38] Received request from ('127.0.0.1', 53893):
-GET http://example.com/ HTTP/1.1
-Host: example.com
-User-Agent: curl/8.9.1
-Accept: */*
-Proxy-Connection: Keep-Alive
-
-
-[2024-12-13 10:10:38] Error: name 'get_from_cache' is not defined
-[2024-12-13 10:10:53] Proxy server listening on 127.0.0.1:8888
-[2024-12-13 10:11:05] Connection from ('127.0.0.1', 53911)
-[2024-12-13 10:11:05] Received request from ('127.0.0.1', 53911):
-GET http://example.com/ HTTP/1.1
-Host: example.com
-User-Agent: curl/8.9.1
-Accept: */*
-Proxy-Connection: Keep-Alive
-
-
-[2024-12-13 10:11:05] Cache miss for request: GET http://example.com/ HTTP/1.1
+[2024-12-13 17:59:54] Cache miss for request: GET http://example.com/ HTTP/1.1
 Host: example.com
 User-Agent: curl/8.9.1
 Accept: */*
 Proxy-Conn
-[2024-12-13 10:11:05] Parsed Host header: example.com
-[2024-12-13 10:11:06] Forwarding HTTP request to example.com:80
-[2024-12-13 10:11:06] Full HTTP request sent to example.com:
+[2024-12-13 17:59:54] Parsed Host header: example.com
+[2024-12-13 17:59:54] Forwarding HTTP request to example.com:80
+[2024-12-13 17:59:54] Full HTTP request sent to example.com:
 GET http://example.com/ HTTP/1.1
 Host: example.com
 User-Agent: curl/8.9.1
@@ -54,25 +23,16 @@ Accept: */*
 Proxy-Connection: Keep-Alive
 
 
-[2024-12-13 10:11:06] before proxy http
-[2024-12-13 10:11:06] Forwarding HTTP request to example.com:80
-[2024-12-13 10:11:06] Full HTTP request sent to example.com:
-GET http://example.com/ HTTP/1.1
-Host: example.com
-User-Agent: curl/8.9.1
-Accept: */*
-Proxy-Connection: Keep-Alive
-
-
-[2024-12-13 10:11:06] Caching request: GET http://example.com/ HTTP/1.1
+[2024-12-13 17:59:54] before proxy http
+[2024-12-13 17:59:54] Caching request: GET http://example.com/ HTTP/1.1
 Host: example.com
 User-Agent: curl/8.9.1
 Accept: */*
 Proxy-Conn with timeout: 30 seconds
-[2024-12-13 10:11:06] Request cached successfully in DB. Response size: 1633 bytes
-[2024-12-13 10:11:06] Forwarded and cached chunk of size 1633 bytes
-[2024-12-13 10:11:18] Connection from ('127.0.0.1', 53941)
-[2024-12-13 10:11:18] Received request from ('127.0.0.1', 53941):
+[2024-12-13 17:59:54] Request cached successfully in DB. Response size: 1592 bytes
+[2024-12-13 17:59:54] Received response chunk: b'HTTP/1.1 200 OK\r\nAge: 76565\r\nCache-Control: max-age=604800\r\nContent-Type: text/html; charset=UTF-8\r\nDate: Fri, 13 Dec 2024 15:59:55 GMT\r\nEtag: "3147526947+ident"\r\nExpires: Fri, 20 Dec 2024 15:59:55 GMT\r\nLast-Modified: Thu, 17 Oct 2019 07:18:26 GMT\r\nServer: ECAcc (dcd/7D85)\r\nVary: Accept-Encoding\r\nX-Cache: HIT\r\nContent-Length: 1256\r\n\r\n<!doctype html>\n<html>\n<head>\n    <title>Example Domain</title>\n\n    <meta charset="utf-8" />\n    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />\n    <meta name="viewport" content="width=device-width, initial-scale=1" />\n    <style type="text/css">\n    body {\n        background-color: #f0f0f2;\n        margin: 0;\n        padding: 0;\n        font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;\n        \n    }\n    div {\n        width: 600px;\n        margin: 5em auto;\n        padding: 2em;\n        background-color: #fdfdff;\n        border-radius: 0.5em;\n        '...
+[2024-12-13 17:59:58] Connection from ('127.0.0.1', 55664)
+[2024-12-13 17:59:58] Received request from ('127.0.0.1', 55664):
 GET http://example.com/ HTTP/1.1
 Host: example.com
 User-Agent: curl/8.9.1
@@ -80,14 +40,14 @@ Accept: */*
 Proxy-Connection: Keep-Alive
 
 
-[2024-12-13 10:11:18] Cache hit for request: GET http://example.com/ HTTP/1.1
+[2024-12-13 17:59:58] Cache hit for request: GET http://example.com/ HTTP/1.1
 Host: example.com
 User-Agent: curl/8.9.1
 Accept: */*
 Proxy-Conn
-[2024-12-13 10:11:18] Cache hit for request from ('127.0.0.1', 53941)
-[2024-12-13 10:11:57] Connection from ('127.0.0.1', 53965)
-[2024-12-13 10:11:57] Received request from ('127.0.0.1', 53965):
+[2024-12-13 17:59:58] Cache hit for request from ('127.0.0.1', 55664)
+[2024-12-13 18:00:17] Connection from ('127.0.0.1', 55684)
+[2024-12-13 18:00:17] Received request from ('127.0.0.1', 55684):
 GET http://example.com/ HTTP/1.1
 Host: example.com
 User-Agent: curl/8.9.1
@@ -95,56 +55,9 @@ Accept: */*
 Proxy-Connection: Keep-Alive
 
 
-[2024-12-13 10:11:57] Cache expired for request: GET http://example.com/ HTTP/1.1
+[2024-12-13 18:00:17] Cache hit for request: GET http://example.com/ HTTP/1.1
 Host: example.com
 User-Agent: curl/8.9.1
 Accept: */*
 Proxy-Conn
-[2024-12-13 10:11:57] Cache miss for request: GET http://example.com/ HTTP/1.1
-Host: example.com
-User-Agent: curl/8.9.1
-Accept: */*
-Proxy-Conn
-[2024-12-13 10:11:57] Parsed Host header: example.com
-[2024-12-13 10:11:57] Blocked blacklisted request to example.com
-[2024-12-13 10:12:15] Connection from ('127.0.0.1', 53992)
-[2024-12-13 10:12:15] Received request from ('127.0.0.1', 53992):
-GET http://example.com/ HTTP/1.1
-Host: example.com
-User-Agent: curl/8.9.1
-Accept: */*
-Proxy-Connection: Keep-Alive
-
-
-[2024-12-13 10:12:15] Cache miss for request: GET http://example.com/ HTTP/1.1
-Host: example.com
-User-Agent: curl/8.9.1
-Accept: */*
-Proxy-Conn
-[2024-12-13 10:12:15] Parsed Host header: example.com
-[2024-12-13 10:12:15] Forwarding HTTP request to example.com:80
-[2024-12-13 10:12:15] Full HTTP request sent to example.com:
-GET http://example.com/ HTTP/1.1
-Host: example.com
-User-Agent: curl/8.9.1
-Accept: */*
-Proxy-Connection: Keep-Alive
-
-
-[2024-12-13 10:12:16] before proxy http
-[2024-12-13 10:12:16] Forwarding HTTP request to example.com:80
-[2024-12-13 10:12:16] Full HTTP request sent to example.com:
-GET http://example.com/ HTTP/1.1
-Host: example.com
-User-Agent: curl/8.9.1
-Accept: */*
-Proxy-Connection: Keep-Alive
-
-
-[2024-12-13 10:12:16] Caching request: GET http://example.com/ HTTP/1.1
-Host: example.com
-User-Agent: curl/8.9.1
-Accept: */*
-Proxy-Conn with timeout: 30 seconds
-[2024-12-13 10:12:16] Request cached successfully in DB. Response size: 1616 bytes
-[2024-12-13 10:12:16] Forwarded and cached chunk of size 1616 bytes
+[2024-12-13 18:00:17] Cache hit for request from ('127.0.0.1', 55684)

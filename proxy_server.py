@@ -199,33 +199,32 @@ def handle_client(client_socket):
             # Forward response
             client_socket.send(response)  # Send the response back to the client
             log_message(f"before proxy http")
-            proxy_http(target_host, target_port, client_socket, request)
-           
+            #proxy_http(target_host, target_port, client_socket, request)
+            add_to_cache(request, full_response, CACHE_TIMEOUT)
             log_message(f"Received response chunk: {response[:1000]}...")
         
         response_parts = full_response.split(b'\r\n\r\n', 1)
         headers = response_parts[0]
         body = response_parts[1] if len(response_parts) > 1 else b""
 
-        headers_decoded = headers.decode(errors='ignore')
-        status_line = headers_decoded.splitlines()[0]
-        log_message(f"Status Line: {status_line}")
-        log_message(f"Headers:\n{headers_decoded}")
-
         try:
-            body_decoded = body.decode(errors='ignore')
-        except UnicodeDecodeError:
-            body_decoded = "[Binary data that couldn't be decoded]"
-        # Forward the request to the target server for HTTP
-        log_message(f"before proxy http")
-        
-        log_message(f"Response Body:\n{body_decoded[:500]}... (truncated)")
+    # Decode and log headers
+            # Getting the header while ignoring issues (if it is binary)
+            headers_decoded = headers.decode(errors='ignore')
+            # Get the status line
+            status_line = headers_decoded.splitlines()[0]
+            log_message(f"Status Line: {status_line}")
+            log_message(f"Headers:\n{headers_decoded}")
 
-    except Exception as e:
-        log_message(f"Error: {e}")
+            # Decode and log the body, handle potential binary content
+            body_decoded = body.decode(errors='ignore') if body else "[Empty body]"
+            log_message(f"Response Body:\n{body_decoded[:500]}... (truncated)")
+
+        except Exception as e:
+            log_message(f"Error while processing response: {e}")
     finally:
+    # Ensure client socket is always closed
         client_socket.close()
-
 def handle_https_tunnel(client_socket, target_host, target_port):
     """Handle HTTPS tunneling (CONNECT method)."""
     try:
@@ -259,67 +258,6 @@ def handle_https_tunnel(client_socket, target_host, target_port):
         client_socket.close()
         proxy_socket.close()
 
-def proxy_http(target_server, target_port, client_socket, request):
-    """Handle forwarding HTTP requests and responses while caching progressively."""
-    try:
-        log_message(f"Forwarding HTTP request to {target_server}:{target_port}")
-        
-        # Log the full HTTP request before sending it
-        log_message(f"Full HTTP request sent to {target_server}:\n{request}")
-        
-        # Forward request to the target server
-        proxy_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        proxy_socket.connect((target_server, target_port))
-        proxy_socket.send(request.encode())
-
-        # Initialize variable to store the full response for eventual caching/logging
-        full_response = b""
-
-        # Receive data from the target server
-        while True:
-            response_chunk = proxy_socket.recv(4096)
-            if not response_chunk:
-                break
-
-            # Send the chunk to the client
-            client_socket.send(response_chunk)
-
-            # Append the chunk to the cumulative full response
-            full_response += response_chunk
-
-            # Cache the chunk progressively
-            add_to_cache(request, full_response, CACHE_TIMEOUT)
-
-            # Log each chunk's size and progress
-            log_message(f"Forwarded and cached chunk of size {len(response_chunk)} bytes")
-
-        # Split response into headers and body for logging purposes
-        response_parts = full_response.split(b'\r\n\r\n', 1)
-        headers = response_parts[0]
-        body = response_parts[1] if len(response_parts) > 1 else b""
-
-        # Decode headers to log them
-        headers_decoded = headers.decode(errors='ignore')
-
-        # Log the status line and headers
-        status_line = headers_decoded.splitlines()[0]
-        log_message(f"Status Line: {status_line}")
-        log_message(f"Headers:\n{headers_decoded}")
-
-        # Decode the body for logging (if possible)
-        try:
-            body_decoded = body.decode(errors='ignore')
-        except UnicodeDecodeError:
-            body_decoded = "[Binary data that couldn't be decoded]"
-
-        # Log the response body (truncated for large responses)
-        log_message(f"Response Body:\n{body_decoded[:500]}... (truncated)")
-
-    except Exception as e:
-        log_message(f"Error forwarding HTTP request: {e}")
-        client_socket.send(b"HTTP/1.1 502 Bad Gateway\r\n\r\n")
-    finally:
-        proxy_socket.close()
 
 def parse_target_host(request):
     """Parse the host from the request headers."""
